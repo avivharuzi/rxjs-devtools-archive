@@ -1,9 +1,9 @@
 {
-  "name": "Chrome Extension Starter",
-  "description": "Chrome Extension Starter",
+  "name": "RxJS DevTools",
+  "description": "RxJS DevTools Chrome Extension",
   "version": "1.0.0",
   "manifest_version": 3,
-  "homepage_url": "https://github.com/avivharuzi/chrome-extension-starter",
+  "homepage_url": "https://github.com/avivharuzi/rxjs-devtools",
   "background": {
     "service_worker": "scripts/background/src/index.js"
   },
@@ -16,8 +16,7 @@
     }
   ],
   "action": {
-    "default_icon": "images/icon-128x128.png",
-    "default_popup": "pages/popup/index.html"
+    "default_icon": "images/icon-128x128.png"
   },
   "icons": {
     "16": "images/icon-16x16.png",
@@ -26,7 +25,6 @@
     "128": "images/icon-128x128.png"
   },
   "devtools_page": "devtools.html",
-  "options_page": "pages/options/index.html",
   "permissions": ["tabs"],
   "host_permissions": ["<all_urls>"]
 }

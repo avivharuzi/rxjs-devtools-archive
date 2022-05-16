@@ -1,5 +1,5 @@
 {
-  "name": "chrome-extension-starter",
+  "name": "rxjs-devtools",
   "version": "0.0.0",
   "scripts": {
     "cz": "git-cz",

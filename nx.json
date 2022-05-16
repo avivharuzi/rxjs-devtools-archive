@@ -1,5 +1,5 @@
 {
-  "npmScope": "chrome-extension-starter",
+  "npmScope": "rxjs-devtools",
   "affected": {
     "defaultBase": "main"
   },
@@ -45,5 +45,5 @@
       "changeDetection": "OnPush"
     }
   },
-  "defaultProject": "popup"
+  "defaultProject": "devtools-panel"
 }

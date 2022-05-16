@@ -27,12 +27,10 @@
     "noUnusedParameters": true,
     "forceConsistentCasingInFileNames": true,
     "paths": {
-      "@chrome-extension-starter/scripts/background": [
+      "@rxjs-devtools/scripts/background": [
         "libs/scripts/background/src/index.ts"
       ],
-      "@chrome-extension-starter/scripts/content": [
-        "libs/scripts/content/src/index.ts"
-      ]
+      "@rxjs-devtools/scripts/content": ["libs/scripts/content/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
