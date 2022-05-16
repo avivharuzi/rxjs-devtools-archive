@@ -28,6 +28,7 @@
     "forceConsistentCasingInFileNames": true,
     "paths": {
       "@rxjs-devtools/common": ["libs/common/src/index.ts"],
+      "@rxjs-devtools/core": ["libs/core/src/index.ts"],
       "@rxjs-devtools/scripts/background": [
         "libs/scripts/background/src/index.ts"
       ],
