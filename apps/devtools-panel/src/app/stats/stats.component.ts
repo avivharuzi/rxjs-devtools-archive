@@ -1,8 +1,18 @@
-import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+
+import { Subject, takeUntil, tap } from 'rxjs';
 
 import { ChartData, ChartOptions } from 'chart.js';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 import { BaseChartDirective } from 'ng2-charts';
+
+import { StoreService } from '../store/store.service';
 
 @Component({
   selector: 'devtools-panel-stats',
@@ -10,7 +20,7 @@ import { BaseChartDirective } from 'ng2-charts';
   styleUrls: ['./stats.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StatsComponent {
+export class StatsComponent implements OnInit, OnDestroy {
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | null = null;
 
   barChartOptions: ChartOptions<'bar'> = {
@@ -35,43 +45,71 @@ export class StatsComponent {
   barChartPlugins: any = [DataLabelsPlugin];
 
   barChartData: ChartData<'bar'> = {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    labels: ['Next', 'Error', 'Complete', 'Subscribe', 'Unsubscribe'],
     datasets: [
       {
-        data: [12, 19, 3, 5, 2, 3],
+        data: [0, 0, 0, 0, 0],
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
+          'rgba(234, 179, 8, 0.2)',
+          'rgba(239, 68, 68, 0.2)',
+          'rgba(34, 197, 94, 0.2)',
+          'rgba(6, 182, 212, 0.2)',
+          'rgba(115, 115, 115, 0.2)',
         ],
         borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
+          'rgba(234, 179, 8, 1)',
+          'rgba(239, 68, 68, 1)',
+          'rgba(34, 197, 94, 1)',
+          'rgba(6, 182, 212, 1)',
+          'rgba(115, 115, 115, 1)',
+        ],
+        hoverBackgroundColor: [
+          'rgba(234, 179, 8, 0.6)',
+          'rgba(239, 68, 68, 0.6)',
+          'rgba(34, 197, 94, 0.6)',
+          'rgba(6, 182, 212, 0.6)',
+          'rgba(115, 115, 115, 0.6)',
+        ],
+        hoverBorderColor: [
+          'rgba(234, 179, 8, 1)',
+          'rgba(239, 68, 68, 1)',
+          'rgba(34, 197, 94, 1)',
+          'rgba(6, 182, 212, 1)',
+          'rgba(115, 115, 115, 1)',
         ],
         borderWidth: 1,
       },
     ],
   };
 
-  public randomize(): void {
-    // Only Change 3 values
-    // this.barChartData.datasets[0].data = [
-    //   Math.round(Math.random() * 100),
-    //   59,
-    //   80,
-    //   Math.round(Math.random() * 100),
-    //   56,
-    //   Math.round(Math.random() * 100),
-    //   40,
-    // ];
-    //
-    // this.chart?.update();
+  private destroySubject = new Subject<void>();
+
+  constructor(private readonly storeService: StoreService) {}
+
+  ngOnInit(): void {
+    this.storeService.stats$
+      .pipe(
+        takeUntil(this.destroySubject),
+        tap((stats) => {
+          if (!this.barChartData.datasets[0]) {
+            return;
+          }
+
+          this.barChartData.datasets[0].data = [
+            stats.next,
+            stats.error,
+            stats.complete,
+            stats.subscribe,
+            stats.unsubscribe,
+          ];
+
+          this.chart?.update();
+        })
+      )
+      .subscribe();
+  }
+
+  ngOnDestroy(): void {
+    this.destroySubject.next();
   }
 }
