@@ -22,7 +22,7 @@ chrome.runtime.onConnect.addListener((connection: chrome.runtime.Port) => {
       currentConnectionDestination.postMessage(message);
     } else {
       console.log(
-        `Cannot post message since the destination has not yet connected`
+        `Cannot post message since the destination has not yet connected, destination: ${destinationName}`
       );
     }
   };
