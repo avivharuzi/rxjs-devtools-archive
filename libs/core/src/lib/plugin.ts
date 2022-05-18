@@ -255,9 +255,11 @@ export class RxJSDevToolsPlugin extends BasePlugin {
   private notifyObservables(): void {
     const data: ChromeExtensionMessageObservables = [
       ...this.observablesRefs.values(),
-    ].map((value) => {
-      return value.item;
-    });
+    ]
+      .map((value) => {
+        return value.item;
+      })
+      .reverse();
 
     sendChromeExtensionMessage({
       type: ChromeExtensionMessageType.Observables,
