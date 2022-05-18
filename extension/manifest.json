@@ -5,12 +5,12 @@
   "manifest_version": 3,
   "homepage_url": "https://github.com/avivharuzi/rxjs-devtools",
   "background": {
-    "service_worker": "scripts/background/src/main.esm.js"
+    "service_worker": "scripts/background/main.esm.js"
   },
   "content_scripts": [
     {
       "all_frames": false,
-      "js": ["scripts/content/src/main.esm.js"],
+      "js": ["scripts/content/main.esm.js"],
       "matches": ["<all_urls>"],
       "run_at": "document_start"
     }
