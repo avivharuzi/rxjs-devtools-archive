@@ -1,1 +1,47 @@
-<p>observables works!</p>
+<div class="observables">
+  <mat-form-field appearance="standard">
+    <mat-label>Filter</mat-label>
+    <input #input matInput placeholder="Filter" (keyup)="applyFilter($event)" />
+  </mat-form-field>
+
+  <div class="table">
+    <table class="mat-elevation-z8" mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="id">
+        <th *matHeaderCellDef mat-header-cell>ID</th>
+        <td *matCellDef="let element" mat-cell>{{ element.id }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="tag">
+        <th *matHeaderCellDef mat-header-cell>Tag</th>
+        <td *matCellDef="let element" mat-cell>{{ element.tag }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <th *matHeaderCellDef mat-header-cell>Type</th>
+        <td *matCellDef="let element" mat-cell>{{ element.type }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="debug">
+        <th *matHeaderCellDef mat-header-cell>Debug</th>
+        <td *matCellDef="let element" mat-cell>
+          <button
+            color="primary"
+            mat-flat-button
+            (click)="debugObservable(element.id)"
+          >
+            Debug
+          </button>
+        </td>
+      </ng-container>
+
+      <tr *matHeaderRowDef="displayedColumns; sticky: true" mat-header-row></tr>
+      <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+
+      <tr *matNoDataRow class="mat-row">
+        <td class="mat-cell" colspan="4">
+          No data matching the filter "{{ input.value }}"
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

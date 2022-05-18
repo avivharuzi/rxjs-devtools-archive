@@ -1,1 +1,64 @@
-<p>notifications works!</p>
+<div class="notifications">
+  <mat-form-field appearance="standard">
+    <mat-label>Filter</mat-label>
+    <input #input matInput placeholder="Filter" (keyup)="applyFilter($event)" />
+  </mat-form-field>
+
+  <div class="table">
+    <table class="mat-elevation-z8" mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="observableType">
+        <th *matHeaderCellDef mat-header-cell>Observable Type</th>
+        <td *matCellDef="let element" mat-cell>{{ element.observableType }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="notificationType">
+        <th *matHeaderCellDef mat-header-cell>Notification Type</th>
+        <td *matCellDef="let element" mat-cell>
+          {{ element.notificationType }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="notificationTypeTime">
+        <th *matHeaderCellDef mat-header-cell>Notification Type</th>
+        <td *matCellDef="let element" mat-cell>
+          {{ element.notificationTypeTime }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="tag">
+        <th *matHeaderCellDef mat-header-cell>Tag</th>
+        <td *matCellDef="let element" mat-cell>{{ element.tag }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="value">
+        <th *matHeaderCellDef mat-header-cell>Value</th>
+        <td *matCellDef="let element" mat-cell>
+          <pre>{{ element.value | json }}</pre>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="error">
+        <th *matHeaderCellDef mat-header-cell>Error</th>
+        <td *matCellDef="let element" mat-cell>
+          <pre>{{ element.error | json }}</pre>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="timestamp">
+        <th *matHeaderCellDef mat-header-cell>Timestamp</th>
+        <td *matCellDef="let element" mat-cell>
+          {{ element.timestamp | date }}
+        </td>
+      </ng-container>
+
+      <tr *matHeaderRowDef="displayedColumns; sticky: true" mat-header-row></tr>
+      <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+
+      <tr *matNoDataRow class="mat-row">
+        <td class="mat-cell" colspan="4">
+          No data matching the filter "{{ input.value }}"
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
