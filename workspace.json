@@ -4,6 +4,8 @@
     "common": "libs/common",
     "core": "libs/core",
     "demo": "apps/demo",
-    "devtools-panel": "apps/devtools-panel"
+    "devtools-panel": "apps/devtools-panel",
+    "scripts-background": "apps/scripts/background",
+    "scripts-content": "apps/scripts/content"
   }
 }
