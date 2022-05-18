@@ -45,16 +45,24 @@ export class StatsComponent implements OnInit, OnDestroy {
   barChartPlugins: any = [DataLabelsPlugin];
 
   barChartData: ChartData<'bar'> = {
-    labels: ['Next', 'Error', 'Complete', 'Subscribe', 'Unsubscribe'],
+    labels: [
+      'Next',
+      'Error',
+      'Complete',
+      'Subscribe',
+      'Unsubscribe',
+      'Active Subscriptions',
+    ],
     datasets: [
       {
-        data: [0, 0, 0, 0, 0],
+        data: [0, 0, 0, 0, 0, 0],
         backgroundColor: [
           'rgba(234, 179, 8, 0.2)',
           'rgba(239, 68, 68, 0.2)',
           'rgba(34, 197, 94, 0.2)',
           'rgba(6, 182, 212, 0.2)',
           'rgba(115, 115, 115, 0.2)',
+          'rgba(59, 130, 246, 0.2)',
         ],
         borderColor: [
           'rgba(234, 179, 8, 1)',
@@ -62,6 +70,7 @@ export class StatsComponent implements OnInit, OnDestroy {
           'rgba(34, 197, 94, 1)',
           'rgba(6, 182, 212, 1)',
           'rgba(115, 115, 115, 1)',
+          'rgba(59, 130, 246, 1)',
         ],
         hoverBackgroundColor: [
           'rgba(234, 179, 8, 0.6)',
@@ -69,6 +78,7 @@ export class StatsComponent implements OnInit, OnDestroy {
           'rgba(34, 197, 94, 0.6)',
           'rgba(6, 182, 212, 0.6)',
           'rgba(115, 115, 115, 0.6)',
+          'rgba(59, 130, 246, 0.6)',
         ],
         hoverBorderColor: [
           'rgba(234, 179, 8, 1)',
@@ -76,6 +86,7 @@ export class StatsComponent implements OnInit, OnDestroy {
           'rgba(34, 197, 94, 1)',
           'rgba(6, 182, 212, 1)',
           'rgba(115, 115, 115, 1)',
+          'rgba(59, 130, 246, 1)',
         ],
         borderWidth: 1,
       },
@@ -101,6 +112,7 @@ export class StatsComponent implements OnInit, OnDestroy {
             stats.complete,
             stats.subscribe,
             stats.unsubscribe,
+            stats.activeSubscriptions,
           ];
 
           this.chart?.update();

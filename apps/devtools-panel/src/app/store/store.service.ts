@@ -24,6 +24,7 @@ export class StoreService {
     next: 0,
     subscribe: 0,
     unsubscribe: 0,
+    activeSubscriptions: 0,
   });
 
   private notificationsSubject = new BehaviorSubject<

@@ -45,6 +45,7 @@ export interface ChromeExtensionMessageStats {
   complete: number;
   subscribe: number;
   unsubscribe: number;
+  activeSubscriptions: number;
 }
 
 export interface ChromeExtensionMessageNotification {

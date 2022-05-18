@@ -34,6 +34,7 @@ export class RxJSDevToolsPlugin extends BasePlugin {
     complete: 0,
     subscribe: 0,
     unsubscribe: 0,
+    activeSubscriptions: 0,
   };
 
   private observablesRefs = new Map<string, ObservableRef<any>>();
@@ -219,6 +220,7 @@ export class RxJSDevToolsPlugin extends BasePlugin {
       complete: stats.complete,
       subscribe: stats.subscribe,
       unsubscribe: stats.unsubscribe,
+      activeSubscriptions: stats.subscribe - stats.unsubscribe,
     };
 
     sendChromeExtensionMessage({
