@@ -57,14 +57,6 @@
       "options": {
         "lintFilePatterns": ["apps/scripts/content/**/*.ts"]
       }
-    },
-    "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/scripts/content"],
-      "options": {
-        "jestConfig": "apps/scripts/content/jest.config.js",
-        "passWithNoTests": true
-      }
     }
   }
 }
